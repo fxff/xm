@@ -1,0 +1,17 @@
+server:
+  port: ${APP_PORT}
+
+db:
+  endpoint: ${DB_HOST}
+  port: ${DB_PORT}
+  name: ${DB_NAME}
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+
+company:
+  subroute: /company
+
+auth:
+  subroute: /auth
+  auth:
+    key: ${AUTH_SECRET}

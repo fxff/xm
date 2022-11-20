@@ -1,0 +1,35 @@
+linters:
+  enable-all: true
+  disable:
+    - varnamelen
+    - wsl
+    - gochecknoglobals
+    - golint
+    - gomnd 
+    - exhaustivestruct
+    - nlreturn
+    - exhaustruct
+    - revive
+    - goerr113
+    - deadcode
+    - scopelint
+    - varcheck
+    - maligned
+    - structcheck
+    - nosnakecase
+    - ifshort
+    - interfacer
+
+linters-settings:
+  gofumpt:
+    extra-rules: true
+  goimports:
+    local-prefixes: xm
+  gci:
+    # Section configuration to compare against.
+    # Section names are case-insensitive and may contain parameters in ().
+    # Default: ["standard", "default"]
+    sections:
+      - standard # Captures all standard packages if they do not match another section.
+      - default # Contains all imports that could not be matched to another section type.
+      - prefix(xm) # Groups all imports with the specified Prefix.

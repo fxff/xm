@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: cmd/company/Dockerfile
+    image: golang:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - migrate
+    environment:
+      - APP_PORT=8080
+      - CONFIG_PATH=cmd/company/config.yaml
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=test
+      - DB_PASSWORD=test
+      - DB_NAME=xm
+      - AUTH_SECRET=Zm9vCg==
+
+  db:
+    container_name: db
+    image: postgres:14
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=xm
+
+  migrate:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    environment:
+      - USER=test
+      - PASS=test
+      - URL=db
+      - PORT=5432
+      - DB=xm
+    depends_on:
+      - db
